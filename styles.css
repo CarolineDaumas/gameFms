@@ -1,0 +1,9 @@
+input{
+    margin: 10px 0;
+    width: 200px;
+}
+
+.formu{
+    display: flex;
+    flex-direction: column;
+}

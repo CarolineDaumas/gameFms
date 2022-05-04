@@ -1,26 +1,31 @@
-let tab = ["oiseau", "avocat", "kiwi", "fraise", "poire", "chocolat", "orange", "Italie", "koala", "bateau",
-    "Groenland", "stylo", "pain", "grenadine", "chien", "imprimante", "chat", "conceptuellement", "chocolatine", "pain au chocolat"]
+let tab = ["oiseau", "avocat", "kiwi", "fraise", "poire", "chocolat", "orange", "Italie", "koala", "bateau", "Groenland", "stylo", "pain", "grenadine", "chien", "imprimante", "chat", "conceptuellement", "chocolatine", "pain au chocolat"]
 
 let newTab = []
 let list = document.getElementById("list")
 let listLi;
+let nIntervId;
 
-
-
-// tab.forEach(element => {
-//     console.log(element)
-// });
-
-// gerér les doublons ?
+// TODO gerér les doublons ?
 function randomArray(tab) {
     for (let i = 0; i < 10; i++) {
         let rep = Math.ceil(Math.random() * tab.length - 1)
         //console.log(tab.length);
-        newTab[i] = rep
+        if(newTab.indexOf(rep) == -1){
+            newTab[i] = rep
+        } else {
+            //Math.ceil(Math.random() * tab.length - 1)
+        }
+        
     }
 }
 
-let nIntervId;
+function createLi(list){
+    newTab.forEach(element => {
+        let li = document.createElement("li")
+        li.innerHTML = tab[element]
+        list.appendChild(li)
+    });
+}
 
 function displayList() {
     // check if already an interval has been set up
@@ -30,19 +35,11 @@ function displayList() {
         console.log("start")
         nIntervId = setInterval(stopList, 5000);
     }
-
 }
 
 function flashText() {
- randomArray(tab)
-    newTab.forEach(element => {
-       
-        let li = document.createElement("li")
-        li.innerHTML = tab[element]
-        list.appendChild(li)
-    });
-    
-
+    randomArray(tab)
+    createLi(list);
 }
 
 function stopList() {
@@ -54,8 +51,27 @@ function stopList() {
     nIntervId = null;
 }
 
+function validateResp(){
+    let validList = document.getElementById("validList")
+    createLi(validList);
+    let nbRep = 0;
+
+    let inputs = document.querySelectorAll("input")
+
+    inputs.forEach(el => {
+        for (let i = 0; i < newTab.length; i++) {
+            if(tab[newTab[i]] == el.value){
+                nbRep++;
+                document.getElementById(el.id).style.borderColor = "green"
+            }
+        }
+    });
+
+    let congrats = document.createElement("p")
+    congrats.innerHTML = "Vous avez " + nbRep + " bonnes réponses."
+    document.getElementById("responses").appendChild(congrats)
+}
+
 document.getElementById("start").addEventListener("click", displayList);
-document.getElementById("stop").addEventListener("click", stopList);
-
-
-
+//document.getElementById("stop").addEventListener("click", stopList);
+document.getElementById("valid").addEventListener("click", validateResp);

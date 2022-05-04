@@ -5,6 +5,9 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel="stylesheet" type="text/css" href="./styles.css" />
+  
   <title>Document</title>
 </head>
 
@@ -13,25 +16,30 @@
 
   <p>Voici une liste de 10 mots, mémorisez les bien, vous devrez ensuite les restituer.</p>
   <button type="button" id="start">Start</button>
-  <button type="button" id="stop">Stop</button>
+  <!-- <button type="button" id="stop">Stop</button> -->
 
-  <ul id="list">
+  <ul id="list"></ul>
 
-  </ul>
-
-  <form action="">
-    <input type="text" name="word1" id="word1"><br />
-    <input type="text" name="word2" id="word2"><br />
-    <input type="text" name="word3" id="word3"><br />
-    <input type="text" name="word4" id="word4"><br />
-    <input type="text" name="word5" id="word5"><br />
-    <input type="text" name="word6" id="word6"><br />
-    <input type="text" name="word7" id="word7"><br />
-    <input type="text" name="word8" id="word8"><br />
-    <input type="text" name="word9" id="word9"><br />
-    <input type="text" name="word10" id="word10"><br />
+  <form action="" class="formu">
+    <input type="text" name="word0" id="word0">
+    <input type="text" name="word1" id="word1">
+    <input type="text" name="word2" id="word2">
+    <input type="text" name="word3" id="word3">
+    <input type="text" name="word4" id="word4">
+    <input type="text" name="word5" id="word5">
+    <input type="text" name="word6" id="word6">
+    <input type="text" name="word7" id="word7">
+    <input type="text" name="word8" id="word8">
+    <input type="text" name="word9" id="word9">
+  
+    <!-- <input type="button" id="valid" value="Valid"> -->
   </form>
   <button type="button" id="valid">Valider</button>
+  
+  <ul id="validList"></ul>
+
+  <p id="responses"></p>
+  
   <script src="script.js"></script>
 </body>
 
