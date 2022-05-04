@@ -1,4 +1,4 @@
-let tab = ["oiseau", "avocat", "kiwi", "fraise", "poire", "chocolat", "orange", "Italie", "koala", "bateau", "Groenland", "stylo", "pain", "grenadine", "chien", "imprimante", "chat", "conceptuellement", "chocolatine", "pain au chocolat"]
+let tab = ["oiseau", "avocat", "kiwi", "fraise", "poire", "chocolat", "orange", "Italie", "koala", "bateau", "Groenland", "stylo", "pain", "grenadine", "chien", "imprimante", "chat", "conceptuellement", "chocolatine", "pain au chocolat", "téléphone", "asticot", "pikachu", "cible", "archer", "bougie", "feuille", "arbre", "nuage", "lumière", "gens", "rue", "voiture", "piéton", "route", "lampadaire", "piquet", "architecture", "panneau", "éclipse", "juste", "git", "soupe", "choux", "farine", "omelette", "écriture", "abécédaire", "organigramme", "artichaut", "épinard", "fermière", "beurre", "laitage", "cabriole", "liste"]
 
 let newTab = []
 let list = document.getElementById("list")
@@ -13,7 +13,7 @@ function randomArray(tab) {
         if(newTab.indexOf(rep) == -1){
             newTab[i] = rep
         } else {
-            //Math.ceil(Math.random() * tab.length - 1)
+            Math.ceil(Math.random() * tab.length - 1)
         }
         
     }
@@ -67,9 +67,12 @@ function validateResp(){
         }
     });
 
-    let congrats = document.createElement("p")
-    congrats.innerHTML = "Vous avez " + nbRep + " bonnes réponses."
-    document.getElementById("responses").appendChild(congrats)
+    if(nbRep != 0){
+        let congrats = document.createElement("p")
+        congrats.innerHTML = "Vous avez " + nbRep + " bonnes réponses."
+        document.getElementById("responses").appendChild(congrats)
+    }
+    
 }
 
 document.getElementById("start").addEventListener("click", displayList);
