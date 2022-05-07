@@ -72,7 +72,7 @@ let validList = document.getElementById("validList");
 let inputs = document.querySelectorAll("input");
 let congrats = document.createElement("p");
 
-// TODO gerér les doublons ?
+//new tab which contains 10 random words
 function randomArray(tab) {
   for (let i = 0; i < 10; i++) {
     let rep = Math.ceil(Math.random() * tab.length - 1);
@@ -80,11 +80,12 @@ function randomArray(tab) {
     if (newTab.indexOf(rep) == -1) {
       newTab[i] = rep;
     } else {
-      Math.ceil(Math.random() * tab.length - 1);
+      newTab[i] = Math.ceil(Math.random() * tab.length - 1);
     }
   }
 }
 
+//create li balises
 function createLi(list) {
   newTab.forEach((element) => {
     li = document.createElement("li");
@@ -93,22 +94,24 @@ function createLi(list) {
   });
 }
 
+//display list of words to find
 function displayList() {
-  // check if already an interval has been set up
   flashText();
 
+  // check if already an interval has been set up
   if (!nIntervId || nIntervId == null) {
-    //console.log("start");
     nIntervId = setInterval(stopList, 5000);
     btnStart.style.display = "none";
   }
 }
 
+//create list & array of words of this list
 function flashText() {
   randomArray(tab);
   createLi(list);
 }
 
+//Function that stop showing list to user
 function stopList() {
   formul.style.display = "flex";
   btnValid.style.display = "block";
@@ -118,35 +121,51 @@ function stopList() {
   clearInterval(nIntervId);
   nIntervId = null;
 
+  //remove liste
   listLi = document.querySelectorAll("li");
   listLi.forEach((e) => e.remove());
 }
 
+//Function that valid responses
 function validateResp() {
   createLi(validList);
+  let liResp = document.getElementsByTagName("li")
 
   inputs.forEach((el) => {
     for (let i = 0; i < newTab.length; i++) {
-      if (tab[newTab[i]] == el.value) {
-        nbRep++;
+      if (tab[newTab[i]] == el.value.trim()) {
+        //nbRep++;
         document.getElementById(el.id).style.border = "3px solid green";
-        document.getElementsByTagName("li")[i].style.color = "green";
+        liResp[i].style.color = "green";
       }
     }
   });
 
+  //count all valid responses
+  for (let j = 0; j < liResp.length; j++) {
+    if(liResp[j].style.color == "green"){
+      nbRep++
+    }    
+  }
+
+  //message congratulations to user
   if (nbRep != 0) {
     congrats.innerHTML = "Vous avez " + nbRep + " bonnes réponses.";
     document.getElementById("responses").appendChild(congrats);
     nbRep = 0;
+  } else {
+    congrats.innerHTML = "Vous n'avez trouvé aucun mot. Ne restez pas sur une défaite et recommencez !"
   }
 
   btnValid.style.display = "none";
   btnReStart.style.display = "block";
 }
 
+//Restart Game
 function reStartGame() {
+  //reset form
   formul.reset();
+
   formul.style.display = "none";
   btnReStart.style.display = "none";
   congrats.innerHTML = "";
@@ -155,9 +174,11 @@ function reStartGame() {
     document.getElementById(el.id).style.border = "1px solid gray";
   });
 
+  //reset list
   listLi = document.querySelectorAll("li");
   listLi.forEach((e) => e.remove());
 
+  //create new list
   displayList();
 }
 
